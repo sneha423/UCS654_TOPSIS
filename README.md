@@ -29,6 +29,7 @@ Use:
 from topsis_sneha_102303033 import topsis
 topsis("input.csv", "1,1,1,2", "+,-,+,+", "output.csv")
 ```
+link for python package: https://pypi.org/project/Topsis-sneha-102303033/
 
 Part 3 – Web App
 Folder: part3_web
