@@ -1,8 +1,3 @@
-#!/usr/bin/env python3
-"""
-TOPSIS Command Line Program
-Usage: python topsis.py <InputDataFile> <Weights> <Impacts> <OutputResultFileName>
-"""
 
 import sys
 import pandas as pd
@@ -10,14 +5,13 @@ import numpy as np
 from pathlib import Path
 
 def main():
-    # Check correct number of parameters (5 total = program + 4 args)
+    # Check correct number of parameters 
     if len(sys.argv) != 5:
         print("Error: Expected 4 arguments: <InputDataFile> <Weights> <Impacts> <OutputResultFileName>.")
         sys.exit(1)
     
     input_file, weights_str, impacts_str, output_file = sys.argv[1:]
     
-    # File not found
     if not Path(input_file).exists():
         print("Error: Input file not found.")
         sys.exit(1)
@@ -50,7 +44,7 @@ def main():
     
     n_criteria = df.shape[1] - 1
     
-    # Parse weights
+    #weights
     try:
         weights = [float(x.strip()) for x in weights_str.split(',')]
     except ValueError:
@@ -64,13 +58,13 @@ def main():
     # Normalize weights
     weights = np.array(weights) / weights.sum()
     
-    # Parse impacts
+    #impacts
     impacts = [imp.strip().upper() for imp in impacts_str.split(',')]
     if len(impacts) != n_criteria or not all(imp in ['+', '-'] for imp in impacts):
         print("Error: Impacts must be '+' or '-' only, comma-separated.")
         sys.exit(1)
     
-    # TOPSIS Algorithm
+    # TOPSIS Algo
     data = df.iloc[:, 1:].values
     norm = np.sqrt(np.sum(data**2, axis=0))
     r = data / norm
@@ -88,7 +82,7 @@ def main():
     score = s_neg / (s_pos + s_neg)
     rank = np.argsort(-score) + 1
     
-    # Output (exact format)
+    # Output
     output_df = df.copy()
     output_df['Topsis Score'] = np.round(score, 4)
     output_df['Rank'] = rank.astype(int)
