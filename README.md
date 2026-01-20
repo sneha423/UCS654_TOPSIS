@@ -29,29 +29,26 @@ Use:
 from topsis_sneha_102303033 import topsis
 topsis("input.csv", "1,1,1,2", "+,-,+,+", "output.csv")
 ```
+
 link for python package: https://pypi.org/project/Topsis-sneha-102303033/
 
 Part 3 – Web App
 Folder: part3_web
 Features:
-Upload CSV
+
+Upload CSV (first column: option names, remaining columns: numeric criteria)
+
 Enter weights and impacts
-Enter email
-Server runs TOPSIS and emails the result file.​
-Configure email (example using environment variables):
 
-# Windows PowerShell
+Optional email field
 
-```
-$env:MAIL_USERNAME="your_project_email@gmail.com"
-$env:MAIL_PASSWORD="your_app_password"
-```
+Server runs TOPSIS and:
 
-Run:
+Shows the ranked result table on the page
 
-```
-cd part3_web
-python app.py
-```
+Sends the result CSV as an email attachment (if email is provided)
 
-Open http://127.0.0.1:5000 and use the form.
+Allows the user to download result.csv directly from the page
+
+Deployed URL:
+<https://topsis-web-vercel.vercel.app/>
